@@ -106,8 +106,14 @@ Install on a USB drive using balenaEtcher, you can get it from here
 
 
 
-Generic Setup for all installs
+##Generic Setup for all installs
 
+ooh, before I forget, before you do any of the below it is best to run the following commads to make sure everything is up to date
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+You will need to enter your password for sudo.
 
 Write a Script to Install Multiple Applications
 There are many ways to do this, but this is the way I am going to use.  All files are attached.
@@ -115,14 +121,14 @@ Using a Plain Text File
 The way I install multiple applications in one go is by using a script with a plain text file.
 
 To that end, let’s first create a file, ubuntu_app_list.txt for example, that contains the names of the applications we want to install:
-```
+```bash
 cat app_list.txt
 wget
 elinks
 dconf-cli
 ```
 Each entry should reside on a separate line. Next, we create a script, install_from_file.sh:
-```
+```bash
 cat > install_from_file.sh
 #!/bin/bash
 app_file=$1
@@ -147,11 +153,11 @@ Furthermore, the while loop uses the IFS= read -r app command to read a line fro
 Also, it displays messages for each installation step.
 
 Let’s make the above script executable:
-```
+```bash
 chmod +x install_from_file.sh
 ```
 Then, we run the script with the name of the text file as an argument. This installs the packages listed in the text file:
-```
+```bash
 ./install_from_file.sh app_list.txt
 ```
 Particularly, this method keeps a consistent list of application installations over multiple systems. However, it requires us to create and maintain a plain text file.
